@@ -2,11 +2,11 @@ import React from 'react';
 import { Route, IndexRedirect } from 'react-router';
 
 import App from './components/App';
-import FirstPage from './components/FirstPage';
+import FirstPage from './components/HomePage';
 
 export default(
     <Route path="/" component={App}>
-        <IndexRedirect to="firstPage" />
-        <Route path="firstPage" component={FirstPage} />
+        <IndexRedirect to="home" />
+        <Route path="home" component={HomePage} />
     </Route>
 );
