@@ -1,4 +1,4 @@
-html, body, .app-root {
+html, body, .app-root, .app, .home-page {
     min-height: 100vh;
     margin: 0;
     padding: 0;
@@ -10,7 +10,7 @@ input:active, input:focus {
     outline-color: transparent;
 }
 
-.app-root {
+.home-page{
     display: flex;
     flex-direction: column;
 }
@@ -18,4 +18,12 @@ input:active, input:focus {
 .content-body {
     background-color: #fafafa;
     flex: 1;
+}
+
+.nav-left {
+    padding: 0.5rem 0.75rem;
+}
+
+.nav-right .nav-item {
+    line-height: 44px;
 }
