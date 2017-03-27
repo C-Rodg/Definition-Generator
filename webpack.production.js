@@ -64,8 +64,9 @@ module.exports = {
         }),
         new ExtractTextPlugin('styles.css'),
         new HtmlWebpackPlugin({
-            title: 'Welcome to Webpack 2', 
-            template: 'src/index.html'
+            title: 'Definition Generator', 
+            template: 'src/index.html',
+            favicon: './src/static/favicon.ico'
         }),
         new UglifyJsPlugin({
             beautify: false,
