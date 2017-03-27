@@ -5,13 +5,13 @@ const path = require('path'),
     UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 
 module.exports = {
+    devtool: 'inline-source-map',
+    target: 'web',
     entry: './src/index.js',
-
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: 'bundle.js'
     },
-    
     module: {
         rules: [
             {
@@ -53,23 +53,31 @@ module.exports = {
             {
                 test: /\.(ttf|eot|svg|png|jpg|ico)(\?[a-z0-9#=&.]+)?$/,
                 loader: 'file-loader'
+            },
+            {
+                test: /\.json$/,
+                loader: 'json-loader'
             }
         ]
     },
     plugins: [
-        new webpack.DefinePlugin({
-            'process.env': { NODE_ENV: JSON.stringify('production') }
-        }),
         new ExtractTextPlugin('styles.css'),
         new HtmlWebpackPlugin({
             title: 'Welcome to Webpack 2', 
             template: 'src/index.html'
         }),
         new UglifyJsPlugin({
-            beautify: false,
+            beautify: true,
             mangle: { screw_ie8: true, warnings: false },
             compress: { screw_ie8: true, warnings: false },
-            comments: false
+            comments: true,
+            sourceMap: true
         })
-    ]
+    ],
+    devServer: {
+        contentBase: path.resolve(__dirname, './src'),
+        hot: true,
+        port: 3000,
+        historyApiFallback: true
+    }
 };

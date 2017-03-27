@@ -5,6 +5,11 @@ html, body, .app-root {
     overflow-y: auto;
 }
 
+input:active, input:focus {
+    outline: none;
+    outline-color: transparent;
+}
+
 .app-root {
     display: flex;
     flex-direction: column;
