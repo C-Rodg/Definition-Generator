@@ -9,6 +9,7 @@ class Config extends Component {
         this.state = {
             questionType: "T",
             questionPrompt: "",
+            questionHint: "",
             responseCount: 1,
             responseObj: {}
         };
@@ -18,6 +19,7 @@ class Config extends Component {
         this.setState({
             questionType: "T",
             questionPrompt: "",
+            questionHint: "",
             responseCount: 1,
             responseObj: {}
         });
@@ -82,7 +84,7 @@ class Config extends Component {
 
     addQuestion() {
         // Create value to add to definition...
-
+        this.props.onQuestionAdded( Object.assign({}, this.state) );
         // Reset the form... 
         this.resetForm();
     }
@@ -96,21 +98,45 @@ class Config extends Component {
                 <div className="card-content">
                     <div className="content">
                         
-                        <div className="field">
-                            <label htmlFor="questionType" className="label">Question Type</label>
-                            <p className="control">
-                                <span className="select">
-                                    <select id="questionType" 
-                                        value={this.state.questionType} 
-                                        onChange={(ev)=> this.setState({questionType: ev.target.value})}
-                                    >
-                                        <option value="T">Text</option>
-                                        <option value="O">Pick One</option>
-                                        <option value="M">Pick Many</option>
-                                    </select>
-                                </span>
-                            </p>
+                        <div className="columns">
+                            <div className="column">
+                                <div className="field">
+                                    <label htmlFor="questionType" className="label">Question Type</label>
+                                    <p className="control">
+                                        <span className="select">
+                                            <select id="questionType" 
+                                                value={this.state.questionType} 
+                                                onChange={(ev)=> this.setState({questionType: ev.target.value})}
+                                            >
+                                                <option value="T">Text</option>
+                                                <option value="O">Pick One</option>
+                                                <option value="M">Pick Many</option>
+                                            </select>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="column">
+                                <div className="field">
+                                    <label htmlFor="questionHint" className="label">Question Data Hint</label>
+                                    <p className="control">
+                                        <span className="select">
+                                            <select id="questionHint" 
+                                                value={this.state.questionHint} 
+                                                onChange={(ev)=> this.setState({questionHint: ev.target.value})}
+                                            >
+                                                <option value="">None</option>
+                                                <option value="FIRSTNAME">First Name</option>
+                                                <option value="LASTNAME">Last Name</option>
+                                                <option value="COMPANY">Company</option>
+                                                <option value="EMAIL">Email Address</option>
+                                            </select>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
+                        
 
                         <div className="field">
                             <label className="label" htmlFor="prompt">Question Prompt</label>

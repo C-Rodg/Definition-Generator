@@ -1,10 +1,10 @@
 import { routerReducer as routing } from 'react-router-redux';
 import { combineReducers } from 'redux';
 
-import { settings } from './reducer_settings';
+import { definition } from './reducer_definition';
 
 const rootReducer = combineReducers({
-    settings, 
+    definition, 
     routing
 });
 

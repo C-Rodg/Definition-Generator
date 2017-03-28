@@ -11,7 +11,7 @@ const Definition = ({def}) => {
                     <div className="field">
                         <label className="label">Definition Text</label>
                         <p className="control">
-                            <textarea className="textarea" placeholder="Definition content..." value={def} readOnly></textarea>
+                            <textarea className="textarea definition-box" placeholder="Definition content..." value={def} readOnly></textarea>
                         </p>
                     </div>
                 </div>
