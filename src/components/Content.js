@@ -10,8 +10,17 @@ class Content extends Component {
 
     // Add question to state
     handleQuestionAdded(q) {
-        console.log(q);
         this.props.addQuestion(q);
+    }
+
+    handleSaveDefinition() {
+        let str = 'data:text/plain;charset=utf-8,' + this.generateDefinitionString();
+        const encoded = encodeURI(str);
+        let link = document.createElement('a');
+        link.setAttribute('href', encoded);
+        link.setAttribute('download', 'definition.txt');
+        document.body.appendChild(link);
+        link.click();
     }
 
     generateDefinitionString() {
@@ -27,7 +36,43 @@ class Content extends Component {
                     def += `]${ques.prompt}`;
                 }
             });
-            def += "\n";
+            def += "\n\n";
+        }
+
+        if (this.props.pickone && this.props.pickone.length > 0) {
+            this.props.pickone.forEach((ques, idx) => {
+                if (ques.prompt) {
+                    def += `O[qrOne${idx}`;
+                    if (ques.hint) {
+                        def += `:${ques.hint}`;
+                    }
+                    def += `]${ques.prompt}`;
+                    Object.keys(ques.responses).forEach((key, i) => {
+                        if (ques.responses[key]) {
+                            def += `\n-[qrOne${idx}_${i}]${ques.responses[key]}`;
+                        }
+                    });
+                    def += "\n\n";
+                }
+            });
+        } 
+
+        if (this.props.pickmany && this.props.pickmany.length > 0) {
+            this.props.pickmany.forEach((ques, idx) => {
+                if (ques.prompt) {
+                    def += `M[qrMany${idx}`;
+                    if (ques.hint) {
+                        def += `:${ques.hint}`;
+                    }
+                    def += `]${ques.prompt}`;
+                    Object.keys(ques.responses).forEach((key, i) => {
+                        if (ques.responses[key]) {
+                            def += `\n-[qrMany${idx}_${i}]${ques.responses[key]}`;
+                        }
+                    });
+                    def += "\n\n";
+                }
+            });
         }
         return def;
     }
@@ -41,7 +86,7 @@ class Content extends Component {
                         <Config onQuestionAdded={this.handleQuestionAdded.bind(this)} />
                     </div>
                     <div className="column is-4">
-                            <Definition def={this.generateDefinitionString()}/>
+                            <Definition def={this.generateDefinitionString()} onSaveDef={this.handleSaveDefinition.bind(this)}/>
                         </div>
                     </div>
                 </div>

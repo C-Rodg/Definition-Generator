@@ -7,8 +7,12 @@ export function addQuestion(question) {
         if (question.questionType === "T") {
             dispatch(addText(question));
         } else {
-            
-            
+            let obj = { prompt: question.questionPrompt, hint: question.questionHint, responseCount: question.responseCount, responses: question.responseObj };
+            if (question.questionType === "O") {
+                dispatch(addPickOne(obj));
+            } else if (question.questionType === "M") {
+                dispatch(addPickMany(obj));
+            }
         }
     }
 }
@@ -21,14 +25,16 @@ function addText(question) {
     };
 }
 
-function addPickOne() {
+function addPickOne(question) {
     return {
         type: ADD_PICKONE,
+        payload: question
     };
 }
 
-function addPickMany() {
+function addPickMany(question) {
     return {
-        type: ADD_PICKMANY
+        type: ADD_PICKMANY,
+        payload: question
     };
 }

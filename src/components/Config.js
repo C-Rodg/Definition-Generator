@@ -2,6 +2,66 @@ import React, { Component } from 'react';
 
 import Response from './Response';
 
+const responseCounts = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19];
+let dataHints = [
+    {
+        hint: "FIRSTNAME",
+        name: "First Name"
+    },
+    {
+        hint: "LASTNAME",
+        name: "Last Name"
+    },
+    {
+        hint: "COMPANY",
+        name: "Company"
+    },
+    {
+        hint: "EMAIL",
+        name: "Email Address"
+    },
+    {
+        hint: "PHONE",
+        name: "Phone"
+    },
+    {
+        hint: "TITLE",
+        name: "Title"
+    },
+    {
+        hint: "ADDRESS1",
+        name: "Address 1"
+    },
+    {
+        hint: "ADDRESS2",
+        name: "Address 2"
+    },
+    {
+        hint: "CITY",
+        name: "City"
+    },
+    {
+        hint: "STATE",
+        name: "State"
+    },
+    {
+        hint: "POSTALCODE",
+        name: "Zip Code"
+    },
+    {
+        hint: "COUNTRY",
+        name: "Country"
+    },
+    {
+        hint: "FAX",
+        name: "Fax"
+    },
+    {
+        hint: "LEADRANKING",
+        name: "Lead Ranking"
+    }
+];
+
 class Config extends Component {
     constructor(props) {
         super(props);
@@ -33,25 +93,10 @@ class Config extends Component {
                     <p className="control">
                         <span className="select">
                             <select id="responseCount" value={this.state.responseCount} onChange={(ev)=> this.setState({responseCount: ev.target.value})}>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                                <option value="18">18</option>
-                                <option value="19">19</option>
+                                { responseCounts.map((item) => {
+                                    return <option key={item} value={item}>{item}</option>;
+                                })
+                                }
                             </select>
                         </span>
                     </p>
@@ -85,6 +130,11 @@ class Config extends Component {
     addQuestion() {
         // Create value to add to definition...
         this.props.onQuestionAdded( Object.assign({}, this.state) );
+        if (this.state.questionHint) {
+            dataHints = dataHints.filter((item) => {
+                return item.hint !== this.state.questionHint;
+            });
+        }
         // Reset the form... 
         this.resetForm();
     }
@@ -126,10 +176,11 @@ class Config extends Component {
                                                 onChange={(ev)=> this.setState({questionHint: ev.target.value})}
                                             >
                                                 <option value="">None</option>
-                                                <option value="FIRSTNAME">First Name</option>
-                                                <option value="LASTNAME">Last Name</option>
-                                                <option value="COMPANY">Company</option>
-                                                <option value="EMAIL">Email Address</option>
+                                                {
+                                                    dataHints.map((h) => {
+                                                        return <option key={h.hint} value={h.hint}>{h.name}</option>
+                                                    })
+                                                }
                                             </select>
                                         </span>
                                     </p>

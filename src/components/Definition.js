@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Definition = ({def}) => {
+const Definition = ({def, onSaveDef}) => {
     return (
         <div className="card definition">
             <header className="card-header">
@@ -16,9 +16,15 @@ const Definition = ({def}) => {
                     </div>
                 </div>
             </div>
-            <footer className="card-footer">
-                <a className="card-footer-item">Save Definition</a>
-            </footer>
+            {
+                def ? 
+                <footer className="card-footer">
+                    <a className="card-footer-item" onClick={() => onSaveDef() }>Save Definition</a>
+                </footer>
+                :
+                ""
+            }
+            
         </div>
     );
 };

@@ -8,7 +8,7 @@
   "scripts": {
     "test": "webpack-dev-server --config ./webpack.dev.js  --inline --hot --port 3000",
     "watch": "rimraf dist && webpack --config ./webpack.dev.js --progress --profile --colors --watch",
-    "build": "rimraf dist && webpack --config ./webpack.production.js --progress --profile --colors -p"
+    "build": "rimraf dist && webpack --config ./webpack.production.js --progress --profile --colors"
   },
   "dependencies": {
     "axios": "^0.15.3",
